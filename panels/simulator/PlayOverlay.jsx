@@ -5,8 +5,6 @@ import { Icon } from 'stellar/ui';
 const SIZE = 64;
 const BAR_WIDTH = 140;
 
-const SPIN_CSS = '@keyframes sim-spin { to { transform: rotate(360deg); } }';
-
 /** What you see while the simulator starts: a spinner, the phase and a progress bar. */
 function Booting({ busy, boot }) {
   const t = useT();
@@ -14,10 +12,9 @@ function Booting({ busy, boot }) {
   const progress = busy === 'afsluiten' ? null : boot?.progress ?? 0.05;
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 }}>
-      <style>{SPIN_CSS}</style>
-      <div style={{
+      <div className="animate-spin" style={{
         width: 28, height: 28, borderRadius: '50%', border: '2.5px solid rgba(255,255,255,0.15)',
-        borderTopColor: 'rgba(255,255,255,0.85)', animation: 'sim-spin 0.9s linear infinite',
+        borderTopColor: 'rgba(255,255,255,0.85)',
       }} />
       <span style={{ color: 'rgba(255,255,255,0.75)', fontSize: 13 }}>{label}…</span>
       {progress !== null && (

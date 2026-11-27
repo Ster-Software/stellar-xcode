@@ -33,16 +33,11 @@ const OUTER = FRAME.border + FRAME.rim;
 const EXTRA = OUTER + FRAME.buttonHoverDepth;
 const MARGIN = 8;
 
-const CSS = `
-.sim-frame__button { position: absolute; padding: 0; border: 0; background: #2c2c2c; box-shadow: inset 0 0 0 0.5px #141414;
-  translate: var(--rest) 0; transition: translate 120ms ease-out; }
-.sim-frame__button--left { border-radius: 1.5px 0 0 1.5px; }
-.sim-frame__button--right { border-radius: 0 1.5px 1.5px 0; }
-button.sim-frame__button { cursor: pointer; }
-button.sim-frame__button:hover, button.sim-frame__button:focus-visible { translate: 0 0; outline: none; }
-button.sim-frame__button--left:active { translate: 1px 0; transition-duration: 40ms; }
-button.sim-frame__button--right:active { translate: -1px 0; transition-duration: 40ms; }
-`;
+// The side buttons: pushed back under the rim at rest (--rest), out on hover or focus, pressed in a pixel on a click.
+const BUTTON = 'absolute border-0 bg-[#2c2c2c] p-0 shadow-[inset_0_0_0_0.5px_#141414] translate-x-(--rest) transition-[translate] duration-120 ease-out';
+const SIDE = { left: 'rounded-l-[1.5px]', right: 'rounded-r-[1.5px]' };
+const PRESSABLE = 'cursor-pointer outline-none hover:translate-x-0 focus-visible:translate-x-0 active:duration-40';
+const PRESSED = { left: 'active:translate-x-px', right: 'active:-translate-x-px' };
 
 function useSize(ref) {
   const [size, setSize] = useState({ width: 0, height: 0 });
@@ -77,9 +72,9 @@ function FrameButton({ spec, onButton }) {
     width: FRAME.buttonHoverDepth + 1,
     '--rest': `${(FRAME.buttonHoverDepth - FRAME.buttonDepth) * (spec.side === 'left' ? 1 : -1)}px`,
   };
-  const className = `sim-frame__button sim-frame__button--${spec.side}`;
+  const className = `${BUTTON} ${SIDE[spec.side]}`;
   if (!spec.button || !onButton) return <span aria-hidden className={className} style={style} />;
-  return <button type="button" title={t(spec.label)} aria-label={t(spec.label)} className={className} style={style} onClick={() => onButton(spec.button)} />;
+  return <button type="button" title={t(spec.label)} aria-label={t(spec.label)} className={`${className} ${PRESSABLE} ${PRESSED[spec.side]}`} style={style} onClick={() => onButton(spec.button)} />;
 }
 
 /**
@@ -97,7 +92,6 @@ export function PhoneFrame({ screen = DEFAULT_SCREEN, onButton, overlay, childre
 
   return (
     <div ref={box} style={{ position: 'relative', flex: 1, minHeight: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <style>{CSS}</style>
       {scale > 0 && (
         <div style={{ position: 'relative', width: (width + EXTRA * 2) * scale, height: (height + EXTRA * 2) * scale, flex: 'none' }}>
           <div style={{ position: 'absolute', left: EXTRA * scale, top: EXTRA * scale, width, height, transform: `scale(${scale})`, transformOrigin: '0 0' }}>
