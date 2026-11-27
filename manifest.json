@@ -11,6 +11,7 @@
   "mcp": "mcp.mjs",
   "engines": { "stellar": ">=1.8.20" },
   "activation": ["onSidebar", "onPanel:simulator", "onCommand:xcode.simulator", "onCommand:xcode.simulatorShutdown", "onCommand:xcode.buildInChat"],
+  "when": {"platforms": ["darwin"], "projectFiles": ["**/*.xcodeproj", "**/*.xcworkspace"]},
   "permissions": ["processes", "network", "files"],
   "activityBar": { "title": "Xcode" },
   "panels": [{ "id": "simulator", "title": "%simulator%", "icon": "Smartphone" }],
