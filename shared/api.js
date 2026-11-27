@@ -31,7 +31,7 @@ export async function call(path, body) {
 
 /** Tells the bridge this panel is going away (it stops itself unless a panel comes back soon). */
 export function sayGoodbye() {
-  // sendBeacon still goes out while the frame is being torn down; plain text, so no CORS preflight.
+  // sendBeacon still goes out while the view is being torn down; plain text, so no CORS preflight.
   if (bridgeUrl) navigator.sendBeacon(`${bridgeUrl}/bye`, '');
 }
 

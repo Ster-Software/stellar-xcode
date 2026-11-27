@@ -10,7 +10,7 @@ export default function XcodeIcon({ state, active, hover }) {
       {(state?.booted || state?.busy) && (
         <span style={{
           position: 'absolute', right: -2, bottom: -1, width: 7, height: 7, borderRadius: '50%',
-          background: state.busy ? 'var(--warn)' : 'var(--ok)', animation: state.busy ? 'xc-pulse 1s ease-in-out infinite' : 'none',
+          background: state.busy ? 'var(--warning)' : 'var(--success)', animation: state.busy ? 'xc-pulse 1s ease-in-out infinite' : 'none',
         }} />
       )}
     </span>

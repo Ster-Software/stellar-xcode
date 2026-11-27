@@ -47,7 +47,7 @@ export function SetupCheck({ online, status, bridgeError }) {
         </span>
         {setup?.running
           ? <span>{t('sim.setup.busy', { step: setup.step })}</span>
-          : <div><Button variant="primary" icon="Download" onClick={install}>{t('sim.setup.install')}</Button></div>}
+          : <div><Button variant="default" icon="Download" onClick={install}>{t('sim.setup.install')}</Button></div>}
         {(error || setup?.error) && <span style={{ color: 'var(--destructive)' }}>{error || setup.error}</span>}
       </Step>
     </div>
