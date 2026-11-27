@@ -1,9 +1,8 @@
 {
-  "$schema": "../manifest.schema.json",
   "name": "xcode",
   "publisher": "ster-software",
   "displayName": "Xcode",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Xcode-projecten bouwen, starten, testen en archiveren, uploaden naar App Store Connect, en een echte iOS Simulator in Stellar Studio.",
   "icon": "Xcode",
   "repository": "Ster-Software/stellar-xcode",

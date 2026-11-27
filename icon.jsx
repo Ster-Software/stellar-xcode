@@ -4,7 +4,7 @@ import { Icon } from 'stellar/ui';
 
 export default function XcodeIcon({ state, active, hover }) {
   return (
-    <span style={{ position: 'relative', display: 'inline-flex', color: active || hover ? 'var(--text)' : 'var(--muted)' }}>
+    <span style={{ position: 'relative', display: 'inline-flex', color: active || hover ? 'var(--foreground)' : 'var(--muted-foreground)' }}>
       <style>{'@keyframes xc-pulse { 0%, 100% { opacity: 1 } 50% { opacity: .35 } }'}</style>
       <Icon name="Xcode" size={21} />
       {(state?.booted || state?.busy) && (

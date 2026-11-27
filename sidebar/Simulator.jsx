@@ -6,7 +6,7 @@ import { useExtension, useT } from 'stellar';
 import { Button, SegmentedControl, Select } from 'stellar/ui';
 import { call, isLive, setBridge, useBridge } from '../shared/api.js';
 
-const label = { display: 'block', margin: '14px 0 6px', fontSize: 11, fontWeight: 600, letterSpacing: '0.04em', textTransform: 'uppercase', color: 'var(--muted)' };
+const label = { display: 'block', margin: '14px 0 6px', fontSize: 11, fontWeight: 600, letterSpacing: '0.04em', textTransform: 'uppercase', color: 'var(--muted-foreground)' };
 const row = { display: 'flex', flexWrap: 'wrap', gap: 6 };
 
 /** What the simulator is doing, in a word. */
@@ -33,7 +33,7 @@ export function SimulatorSettings() {
   };
 
   if (online === undefined && !error) return null;
-  if (!online || !status) return <p style={{ color: 'var(--text-dim)' }}>{error || t('sim.noBridge')}</p>;
+  if (!online || !status) return <p style={{ color: 'var(--muted-foreground)' }}>{error || t('sim.noBridge')}</p>;
   const { runtimes = [], selection, device } = status;
   const runtime = runtimes.find((r) => r.id === selection?.runtime) ?? runtimes[0];
   const live = isLive(online, status);
@@ -48,9 +48,9 @@ export function SimulatorSettings() {
 
   return (
     <div>
-      <p style={{ color: 'var(--text-dim)', margin: 0 }}>{stateText(status, t)}{device?.name ? ` · ${device.name}` : ''}</p>
+      <p style={{ color: 'var(--muted-foreground)', margin: 0 }}>{stateText(status, t)}{device?.name ? ` · ${device.name}` : ''}</p>
 
-      {!status.ready && <p style={{ color: 'var(--text-dim)' }}>{t('sim.notReady')}</p>}
+      {!status.ready && <p style={{ color: 'var(--muted-foreground)' }}>{t('sim.notReady')}</p>}
 
       {runtime && (
         <>
@@ -62,7 +62,7 @@ export function SimulatorSettings() {
             disabled={Boolean(status.busy)} />
         </>
       )}
-      {!runtime && <p style={{ color: 'var(--text-dim)' }}>{t('sim.noRuntimes')}</p>}
+      {!runtime && <p style={{ color: 'var(--muted-foreground)' }}>{t('sim.noRuntimes')}</p>}
 
       {live && (
         <>
@@ -74,12 +74,12 @@ export function SimulatorSettings() {
 
       {/* Paneel openen is in the section's header. */}
       <div style={{ ...row, marginTop: 14 }}>
-        {live && <Button icon="Home" onClick={() => act('/button', { button: 'HOME' })}>Home</Button>}
-        {live && <Button icon="Lock" onClick={() => act('/button', { button: 'LOCK' })}>{t('sim.lock')}</Button>}
-        {status.ready && !device?.booted && !status.busy && <Button variant="primary" icon="Play" onClick={() => act('/boot')}>{t('sim.boot')}</Button>}
-        {live && <Button icon="Power" onClick={() => act('/shutdown')}>{t('sim.shutdown')}</Button>}
+        {live && <Button variant="outline" icon="Home" onClick={() => act('/button', { button: 'HOME' })}>Home</Button>}
+        {live && <Button variant="outline" icon="Lock" onClick={() => act('/button', { button: 'LOCK' })}>{t('sim.lock')}</Button>}
+        {status.ready && !device?.booted && !status.busy && <Button variant="default" icon="Play" onClick={() => act('/boot')}>{t('sim.boot')}</Button>}
+        {live && <Button variant="outline" icon="Power" onClick={() => act('/shutdown')}>{t('sim.shutdown')}</Button>}
       </div>
-      {error && <p style={{ color: 'var(--danger)', marginTop: 10 }}>{error}</p>}
+      {error && <p style={{ color: 'var(--destructive)', marginTop: 10 }}>{error}</p>}
     </div>
   );
 }

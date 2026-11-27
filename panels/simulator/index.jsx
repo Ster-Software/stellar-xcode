@@ -8,9 +8,6 @@ import { DEFAULT_SCREEN, PhoneFrame } from './PhoneFrame.jsx';
 import { ErrorBar, PlayOverlay } from './PlayOverlay.jsx';
 import { SetupCheck } from './SetupCheck.jsx';
 
-/** Lets the panel's `height: 100%` reach the frame's full height: html > body > #root (12px padding) > panel. */
-const FULL_HEIGHT_CSS = 'html, body, #root { height: 100%; } #root { box-sizing: border-box; }';
-
 function screenPoints(status) {
   const screen = status?.screen;
   return screen?.width_points ? { width: screen.width_points, height: screen.height_points } : DEFAULT_SCREEN;
@@ -39,7 +36,6 @@ export default function Simulator() {
   if (!online || !status?.ready) {
     return (
       <div style={{ height: '100%', overflow: 'auto' }}>
-        <style>{FULL_HEIGHT_CSS}</style>
         <SetupCheck online={Boolean(online)} status={status} bridgeError={bridgeError} />
       </div>
     );
@@ -71,7 +67,6 @@ export default function Simulator() {
 
   return (
     <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <style>{FULL_HEIGHT_CSS}</style>
       <PhoneFrame
         screen={screenPoints(status)}
         onButton={live ? (button) => act('/button', { button }) : undefined}
