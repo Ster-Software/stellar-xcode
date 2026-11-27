@@ -8,7 +8,7 @@
   "repository": "Ster-Software/stellar-xcode",
   "main": "main.mjs",
   "mcp": "mcp.mjs",
-  "engines": { "stellar": ">=1.8.21" },
+  "engines": { "stellar": ">=2.0.0" },
   "activation": ["onSidebar", "onPanel:simulator", "onCommand:xcode.simulator", "onCommand:xcode.simulatorShutdown", "onCommand:xcode.buildInChat"],
   "when": {"platforms": ["darwin"], "projectFiles": ["**/*.xcodeproj", "**/*.xcworkspace"]},
   "permissions": ["processes", "network", "files"],
