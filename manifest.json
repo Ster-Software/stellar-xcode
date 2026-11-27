@@ -1,0 +1,29 @@
+{
+  "$schema": "../manifest.schema.json",
+  "name": "xcode",
+  "publisher": "ster-software",
+  "displayName": "Xcode",
+  "version": "1.5.0",
+  "description": "Xcode-projecten bouwen, starten, testen en archiveren, uploaden naar App Store Connect, en een echte iOS Simulator in Stellar Studio.",
+  "icon": "Xcode",
+  "repository": "Ster-Software/stellar-xcode",
+  "main": "main.mjs",
+  "mcp": "mcp.mjs",
+  "engines": { "stellar": ">=1.8.20" },
+  "activation": ["onSidebar", "onPanel:simulator", "onCommand:xcode.simulator", "onCommand:xcode.simulatorShutdown", "onCommand:xcode.buildInChat"],
+  "permissions": ["processes", "network", "files"],
+  "activityBar": { "title": "Xcode" },
+  "panels": [{ "id": "simulator", "title": "%simulator%", "icon": "Smartphone" }],
+  "commands": [
+    { "id": "xcode.simulator", "title": "%commandSimulator%", "icon": "Smartphone" },
+    { "id": "xcode.simulatorShutdown", "title": "%commandShutdown%", "icon": "Stop" },
+    { "id": "xcode.buildInChat", "title": "%commandBuildInChat%", "icon": "Hammer" }
+  ],
+  "automations": {
+    "triggers": [{ "id": "action-done", "label": "%trigger.actionDone%", "when": "%trigger.actionDoneWhen%", "icon": "Hammer",
+      "fields": { "actie": "build, run, test, clean, archive of upload", "scheme": "het scheme", "uitslag": "gelukt of mislukt", "exitcode": "de exitcode" } }]
+  },
+  "chat": {
+    "slashCommands": [{ "name": "xcode-build", "command": "xcode.buildInChat", "description": "%slashBuild%", "argumentHint": "scheme" }]
+  }
+}
